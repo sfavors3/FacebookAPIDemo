@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">FB API Demo</string>
+    <color name="background_color">#40628E</color>
+    <string name="APP_ID">179200992214415</string>
+
+</resources>

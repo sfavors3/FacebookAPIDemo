@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+			body {background-color:#EEEEEE}
+			h1 {color:#101010; font-size:30px;}
+			h3 {color:#101010; font-size:20px;}
+			p {color:#101010; font-size:15px;}
+			a {color:#40628E; font-size:15px;}
+			code {color:#309313; font-size:13px;}
+			pre {color:#309313; font-size:13px;}
+			.note{color:#B9291C; font-size:15px;}
+		</style>
+	</head>
+	<body>
+		<h1>Step 5: Add your app's signature to the Facebook App Settings</h1>
+		<p>Facebook requires an additional layer of security for mobile apps in the form of an application signature. You need to put your Android application signature into your Facebook app settings.</p>
+		<p>There are two ways to find your Android application signature:</p>
+		<ul>
+			<li><p>From debug logs generated during Single Sign On when there is a signature mismatch.</p></li>
+			<li><p>From the Java JDK <b>keytool</b>.</p></li>
+		</ul>
+		
+		<h3>Debug Log Data Setup</h3>
+		<p>Using this method you will turn on debugging in the Android SDK then view the error logs during the Single Sign On step later on in this tutorial. The error logs will provide you with information about the signature sent to Facebook.</p>
+		<p>To turn on debugging in the Android SDK, modify <code>Util.java</code>:</p>
+		<pre>
+private static boolean ENABLE_LOG = true;
+		</pre>
+		<p>Skip to the next step in this tutorial. The instructions in the build step will show you how to get the application signature that you should then register in the <b>Mobile</b> section of the <a href="https://developers.facebook.com/apps">App Dashboard</a>.</p>
+		
+		<h3>Using the Keytool</h3>
+		<p>You can generate a signature by running the <b>keytool</b> that comes with the Java JDK.  The following shows how to export the key for your app using the debug defaults specified by the Android SDK and Eclipse.</p>
+		<p><b>PLEASE READ</b> - the keytool.exe silently generates a keyhash even if it can't find the debug.keystore or if the password is incorrect. Make sure that you have provided the correct path to the debug.keystore. For Windows, it is generally at <code>C:\Users\&lt;user&gt;\.android\</code> and for Mac at <code>/Users/&lt;user&gt;/.android/</code>. <b>Also make sure you are using the correct password - for the debug keystore, use 'android' to generate the keyhash.</b> General Rule: If the tool does not ask for password, your keystore path is incorrect. More info under 'Signing in Debug Mode' on the <a href="http://developer.android.com/guide/publishing/app-signing.html">Signing Your Applications</a>. Refer to Troubleshoot section below for more tips on keyhash.</p>
+		<pre>
+keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
+		</pre>
+		<p>This tool generates a string that must be registered in the <b>Native Android App</b> section of the <a href="https://developers.facebook.com/apps">App Dashboard</a> for your app. Remember to click 'Save Changes' to save the keyhash.</p>
+		<div align="center">
+			<a href="https://developers.facebook.com/attachment/Android_SSO_Settings.png">
+				<img width="300px" src="https://developers.facebook.com/attachment/Android_SSO_Settings.png"></img>
+			</a>
+		</div>
+		<p class="note">Notes: You should bear in mind that the process described above only allows you to generate signature for debugging purpose. If you want to publish your app to Android market, you probably will use your own key to sign the <b>.apk</b> file, which means the signature also will change.</p>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+			body {background-color:#EEEEEE}
+			h1 {color:#101010; font-size:30px;}
+			p {color:#101010; font-size:15px;}
+			a {color:#40628E; font-size:15px;}
+			code {color:#309313; font-size:13px;}
+			pre {color:#309313; font-size:13px;}
+			.note{color:#B9291C; font-size:15px;}
+		</style>
+	</head>
+	<body>
+		<h1>Step 10: Social Channels</h1>
+
+		<p>The Android SDK provides a method for displaying a <a href="https://developers.facebook.com/docs/reference/dialogs/">Facebook Platform dialog</a>, which allows you to enhance social distribution and provide basic Facebook functionality in your app with a singe line of code -- no need to build native dialogs, make API calls, or handle responses. Check out <a href="https://developers.facebook.com/docs/mobile/support/">Mobile Distribution</a> for  up-to-date list of platforms supporting social distribution.</p>
+
+		<ul>
+		<li><a href="https://developers.facebook.com/docs/reference/dialogs/feed/">Feed Dialog</a> - the dialog to publish posts to a user's feed.</li>
+		</ul>
+
+		<div align="center">
+			<a href="https://developers.facebook.com/attachment/android_hackbook_update_status.png">
+				<img width="300px" src="https://developers.facebook.com/attachment/android_hackbook_update_status.png"></img>
+			</a>
+		</div>
+
+		<p>To invoke a feed dialog:</p>
+
+		<pre>
+//post on user's wall.
+mFacebook.dialog(context, "feed", new PostDialogListener());
+
+//post on friend's wall.
+Bundle params = new Bundle();
+params.putString("to", "<friend_uid>");
+mFacebook.dialog(context, "feed", params, new PostDialogListener());
+		</pre>
+
+		<ul>
+		<li><a href="https://developers.facebook.com/docs/reference/dialogs/requests/">Request Dialog</a> - the dialog to send app requests to one or more friends. Note: incoming requests are not yet supported on Android and we will soon release a version of the Android app that supports requests, bookmarks, and search.</li>
+		</ul>
+
+		<div align="center">
+			<a href="https://developers.facebook.com/attachment/android_hackbook_apprequests.png">
+				<img width="300px" src="https://developers.facebook.com/attachment/android_hackbook_apprequests.png"></img>
+			</a>
+		</div>
+
+		<p>To invoke a request dialog:</p>
+
+		<pre>
+//Send requests with no friend pre-selected and user
+//selects friends on the dialog screen.
+Bundle params = new Bundle();
+params.putString("message", "Hey there!");
+mFacebook.dialog(context, "apprequests", params, new AppRequestsListener());
+
+//send request to a particular friend.
+Bundle params = new Bundle();
+params.putString("message", "Hey there!");
+params.putString("to", "<friend_uid>");
+mFacebook.dialog(context, "apprequests", params, new AppRequestsListener());
+		</pre>
+		
+		<p class="note">Notes: These will be demonstrated in the <b>Post Data</b> module of this app.</p>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

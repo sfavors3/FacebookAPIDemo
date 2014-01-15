@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+			body {background-color:#EEEEEE}
+			h1 {color:#101010; font-size:30px;}
+			p {color:#101010; font-size:15px;}
+			a {color:#40628E; font-size:15px;}
+			code {color:#309313; font-size:13px;}
+			pre {color:#309313; font-size:13px;}
+			.note{color:#B9291C; font-size:15px;}
+		</style>
+	</head>
+	<body>
+		<h1>Step 7: Enable user to Log Out of your App</h1>
+		<p>When the user wants to stop using Facebook integration with your app, you can call the <code>logout</code> method to clear the app state and make a server request to invalidate the current <code>access_token</code>.</p>
+		<pre>
+mAsyncRunner.logout(getContext(), new RequestListener() {
+	@Override
+	public void onComplete(String response, Object state) {}
+
+	@Override
+	public void onIOException(IOException e, Object state) {}
+
+	@Override
+	public void onFileNotFoundException(FileNotFoundException e, Object state) {}
+
+	@Override
+	public void onMalformedURLException(MalformedURLException e, Object state) {}
+
+	@Override
+	public void onFacebookError(FacebookError e, Object state) {}
+});
+		</pre>
+
+		<p>Note that logging out will not revoke your application's permissions, but will simply clear your application's <code>access_token</code>. If a user that has previously logged out of your app returns, they will simply see a notification that they are logging into your app, not a notification to grant permissions. You can revoke application's permissions by issuing the following api call:</p>
+
+		<pre>
+String method = "DELETE";
+Bundle params = new Bundle();
+/*
+ * this will revoke 'publish_stream' permission
+ * Note: If you don't specify a permission then this will de-authorize the application completely.
+ */
+params.putString("permission", "publish_stream");
+mAsyncRunner.request("/me/permissions", params, method, new RevokePermissionListener(), null);
+		</pre>
+
+		<p><code>RevokePermissionListener</code> is a custom class that implements <code>AsyncFacebookRunner.RequestListener()</code> which you will have to create.</p>
+
+		<p>Also, the user can visit the <a href="https://www.facebook.com/settings/?tab=privacy">"Applications, Games, and Websites" tab of their Facebook privacy settings dashboard</a>.</p>
+		
+		<p class="note">Notes: These will be demonstrated in the <b>Sign In</b> module of this app.</p>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

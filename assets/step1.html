@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+			body {background-color:#EEEEEE}
+			h1 {color:#101010; font-size:30px;}
+			p {color:#101010; font-size:15px;}
+			a {color:#40628E; font-size:15px;}
+			code {color:#309313; font-size:13px;}
+			pre {color:#309313; font-size:13px;}
+			.note{color:#B9291C; font-size:15px;}
+		</style>
+	</head>
+	<body>
+		<h1>Step 1: Register your Android app with Facebook</h1>
+		<p>To begin integrating with the Facebook Platform, <a href="https://www.facebook.com/developers/createapp.php">create a new app on Facebook</a> and enter your app's basic information.</p>
+		<div align="center">
+			<a href="https://developers.facebook.com/attachment/android_devapp_basic.png">
+				<img width="300px" src="https://developers.facebook.com/attachment/android_devapp_basic.png"></img>
+			</a>
+		</div>
+		<p>Note your App ID. You are going to need it when integrating Facebook Android SDK into your code.</p>
+		<p>You application is now set up and you are ready to begin integrating with Facebook!</p>
+		<p class="note">Notes: This App ID probably is the single most important thing you should keep track of, as you are going to use it to initialize the object:</p>
+		<pre>
+Facebook fb = new Facebook("App ID");
+		</pre>
+	</body>
+</html>

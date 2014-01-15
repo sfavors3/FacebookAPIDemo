@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+			body {background-color:#EEEEEE}
+			h1 {color:#101010; font-size:30px;}
+			p {color:#101010; font-size:15px;}
+			a {color:#40628E; font-size:15px;}
+			code {color:#309313; font-size:13px;}
+			pre {color:#309313; font-size:13px;}
+			.note{color:#B9291C; font-size:15px;}
+		</style>
+	</head>
+	<body>
+		<h1>Step 8: Extending the access token</h1>
+
+		<p>With the deprecation of offline_access, you need to extend your access_token every time a user opens your app. To do this, call facebook method <code>extendAccessTokenIfNeeded</code> in your Activity's <code>onResume()</code> function:</p>
+
+		<pre>
+public void onResume() {    
+	super.onResume();
+	facebook.extendAccessTokenIfNeeded(this, null);
+}
+		</pre>
+
+		<p>Note: Make sure you have the latest android SDK available at <a href="https://github.com/facebook/facebook-android-sdk/">https://github.com/facebook/facebook-android-sdk/</a></p>
+		
+		<p class="note">Notes: These will be demonstrated in the <b>Sign In</b> module of this app.</p>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
